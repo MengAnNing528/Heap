@@ -1,0 +1,82 @@
+//Двоичная куча
+public class BinaryHeap
+{
+  privare List<int>list;
+  public int heapSize
+  {
+    get
+    {
+      return this.list.Count();
+    }
+  }
+}
+
+public void add(int value){
+  list.Add(value);
+  int i = heapSize - 1;
+  int parent = (i - 1) / 2;
+  while (i > 0 && list[parent] < list[i])
+  { 
+    int temp = list[i];
+    list[i] = list[parent];
+    list[parent] = temp;
+    i = parent;
+    parent = (i - 1) / 2;
+  }
+}
+
+
+//Упорядочение двоичной кучи
+public void heapify(int i)
+{
+  int leftChild;
+  int rightChild;
+  int largestChild;
+
+  for (;;)
+  {
+    leftChild = 2 * i + 1;
+    rightChild = 2 * i + 2;
+    largestChild = i;
+
+    if (leftChild < heapSize && list[leftChild] > list[largestChild])
+    {
+      largestChild = leftChild;
+    }
+
+    if (rightChild < heapSize && list[rightChild] > list[largestChild])
+    {
+      largestChild = rightChild;
+    }
+
+    if (largestChild == i)
+    {
+      break;
+    }
+
+    int temp = list[i];
+    list[i] = list[largestChild];
+    list[largestChild] = temp;
+    i = largestChild;
+  }
+}
+
+//Построение двоичной кучи. Извлечение (удаление) максимального элемента
+public int getMax()
+{
+  int result = list[0];
+  list[0] = list[heapSize - 1];
+  list.RemoveAt(heapSize - 1);
+  return result;
+}
+
+public void heapSort(int[] array)
+{
+  buildHeap(array);
+  for (int i = array.Length - 1; i >= 0; i--)
+  {
+    array[i] = getMax();
+    heapify(0);
+  }
+}
+
