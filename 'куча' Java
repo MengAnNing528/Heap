@@ -80,3 +80,41 @@ public void heapSort(int[] array)
   }
 }
 
+
+//merge
+Binomial Heap merge(H1: BinomialHeap, H2: BinomialHeap):
+  if H1 = null
+    return 112
+  if H2 = null
+    return H1
+  H.head = null    // И - результат слияния
+  curH = H.head    // слияние корневых списков
+  curH1 = H1.head
+  curH2 - H2.head
+  while curH1 != null and curH2 != null
+    if curH1.degree < curH2.degree
+      curH.sibling = curH1
+      curH = curH1
+      curH1 = curH1.sibling
+    else
+      curH.sibling = curH2
+      curH = curH2
+      curH2 = curH2.sibling
+  if curH1 = null
+    while curH2! = null
+      curH.sibling = curH2
+      curH2 = curH2.sibling
+  else
+    while curH1 != null
+      curH.sibling = curH1
+      curH1 = curH1.sibling
+  curH = H.head     // объединение деревьев одной степени
+  while curH.sibling != null
+    if curH.degree == curH.sibling.degree
+      p[curH] = curH.sibling
+      tmp = curH.sibling
+      curH.sibling = curH.sibling.child
+      curH = tmp
+      continue
+    curH= curH.sibling
+  return H
